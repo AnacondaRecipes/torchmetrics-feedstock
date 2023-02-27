@@ -1,5 +1,5 @@
 {% set name = "torchmetrics" %}
-{% set version = "0.11.1" %}
+{% set version = "0.11.2" %}
 
 package:
   name: {{ name|lower }}
@@ -10,27 +10,35 @@ source:
   sha256: de2e9feb3316f798ab08b318302ff04e764f47e691f0847f780044279fa176ca
 
 build:
-  noarch: python
   number: 0
-  script: {{ PYTHON }} -m pip install . -vv
+  skip: True  # [py<36]
+  script: {{ PYTHON }} -m pip install . -vv --no-deps
 
 requirements:
   host:
     - pip
-    - python >=3.6
-  run:
-    - packaging
+    - python
     - setuptools
-    - python >=3.7
+    - wheel
+  run:
+    - python
+    - numpy >=1.17.2
+    - packaging  # hotfix for utils, can be dropped with lit-utils >=0.5
     - pytorch >=1.8.1
+    - typing-extensions  # [py<39]
 
 test:
   imports:
     - torchmetrics
+  requires:
+    - pip
+  commands:
+    - pip check
 
 about:
   home: https://pypi.org/project/torchmetrics/
   license: Apache-2.0
+  license_family: Apache
   license_file: LICENSE
   summary: Collection of PyTorch native metrics for easy evaluating machine learning models
   description: |

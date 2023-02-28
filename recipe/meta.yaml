@@ -1,36 +1,47 @@
 {% set name = "torchmetrics" %}
-{% set version = "0.11.1" %}
+{% set version = "0.11.2" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: de2e9feb3316f798ab08b318302ff04e764f47e691f0847f780044279fa176ca
+  # Update an url to https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  # when the package will be available on PyPI.
+  url: https://github.com/Lightning-AI/metrics/archive/refs/tags/v{{ version }}.tar.gz
+  sha256: 1c48fea9bc466cd618af1ce09134aa86829a4c8883305982710250df0058e711
 
 build:
-  noarch: python
   number: 0
-  script: {{ PYTHON }} -m pip install . -vv
+  skip: True  # [py<37]
+  script: {{ PYTHON }} -m pip install . -vv --no-deps
 
 requirements:
   host:
+    - python
+    - numpy
     - pip
-    - python >=3.6
-  run:
-    - packaging
     - setuptools
-    - python >=3.7
+    - wheel
+  run:
+    - python
+    - numpy >=1.17.2
+    - packaging  # hotfix for utils, can be dropped with lit-utils >=0.5
     - pytorch >=1.8.1
+    - typing-extensions  # [py<39]
 
 test:
   imports:
     - torchmetrics
+  requires:
+    - pip
+  commands:
+    - pip check
 
 about:
   home: https://pypi.org/project/torchmetrics/
   license: Apache-2.0
+  license_family: Apache
   license_file: LICENSE
   summary: Collection of PyTorch native metrics for easy evaluating machine learning models
   description: |

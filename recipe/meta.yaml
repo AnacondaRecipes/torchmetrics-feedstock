@@ -8,11 +8,11 @@ package:
 source:
   # Update an url to https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   # when the package will be available on PyPI.
-  url: https://github.com/Lightning-AI/metrics/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: 1c48fea9bc466cd618af1ce09134aa86829a4c8883305982710250df0058e711
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: 5a1f5fff9b1fb695bbcab6442d768e2e9b9535d00f4b4dea9ce03d40c866be07
 
 build:
-  number: 0
+  number: 1
   skip: True  # [py<37]
   script: {{ PYTHON }} -m pip install . -vv --no-deps
 

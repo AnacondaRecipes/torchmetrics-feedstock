@@ -59,3 +59,5 @@ extra:
   recipe-maintainers:
     - Borda
     - williamFalcon
+  skip-lints:
+    - python_build_tool_in_run

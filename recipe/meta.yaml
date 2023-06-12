@@ -9,7 +9,7 @@ source:
   # Update an url to https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   # when the package will be available on PyPI.
   url: https://github.com/Lightning-AI/metrics/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: 1c48fea9bc466cd618af1ce09134aa86829a4c8883305982710250df0058e711
+  sha256: 78d7f74b9ca2435104e7a3b4ee25594c4fda59ca241056edfa1d104ea7fac1ae
 
 build:
   number: 1

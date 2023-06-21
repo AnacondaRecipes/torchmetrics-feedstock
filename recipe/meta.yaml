@@ -1,5 +1,5 @@
 {% set name = "torchmetrics" %}
-{% set version = "0.11.2" %}
+{% set version = "0.11.4" %}
 
 package:
   name: {{ name|lower }}
@@ -9,11 +9,12 @@ source:
   # Update an url to https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   # when the package will be available on PyPI.
   url: https://github.com/Lightning-AI/metrics/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: 78d7f74b9ca2435104e7a3b4ee25594c4fda59ca241056edfa1d104ea7fac1ae
+  sha256: fb58c830b67902acfd0fc5ddee268a64bdc476c41fb571347c6134c261f1723d
 
 build:
   number: 1
-  skip: True  # [py<37]
+  # pytorch hasn't python 3.11 support on ppc64le
+  skip: True  # [py<37 or (linux and ppc64le and py>311)]
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 
 requirements:
@@ -27,7 +28,7 @@ requirements:
     - python
     - numpy >=1.17.2
     - packaging  # hotfix for utils, can be dropped with lit-utils >=0.5
-    - pytorch >=1.8.1
+    - pytorch >=1.8.1,<2.0.0
     - typing-extensions  # [py<39]
 
 test:

@@ -29,7 +29,7 @@ requirements:
     - python
     - numpy >=1.17.2
     - packaging  # hotfix for utils, can be dropped with lit-utils >=0.5
-    - pytorch >=1.8.1,<2.0.0
+    - pytorch >=1.8.1
     - typing-extensions  # [py<39]
 
 test:

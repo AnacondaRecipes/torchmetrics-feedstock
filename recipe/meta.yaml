@@ -12,9 +12,9 @@ source:
   sha256: 1c48fea9bc466cd618af1ce09134aa86829a4c8883305982710250df0058e711
 
 build:
-  number: 0
+  number: 1
   skip: True  # [py<37]
-  script: {{ PYTHON }} -m pip install . -vv --no-deps
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 
 requirements:
   host:
@@ -59,3 +59,5 @@ extra:
   recipe-maintainers:
     - Borda
     - williamFalcon
+  skip-lints:
+    - python_build_tool_in_run

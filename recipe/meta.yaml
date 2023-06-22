@@ -1,5 +1,5 @@
 {% set name = "torchmetrics" %}
-{% set version = "0.11.2" %}
+{% set version = "0.11.4" %}
 
 package:
   name: {{ name|lower }}
@@ -9,12 +9,14 @@ source:
   # Update an url to https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   # when the package will be available on PyPI.
   url: https://github.com/Lightning-AI/metrics/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: 1c48fea9bc466cd618af1ce09134aa86829a4c8883305982710250df0058e711
+  sha256: fb58c830b67902acfd0fc5ddee268a64bdc476c41fb571347c6134c261f1723d
 
 build:
   number: 0
-  skip: True  # [py<37]
-  script: {{ PYTHON }} -m pip install . -vv --no-deps
+  # pytorch hasn't python 3.11 support on ppc64le: ppc requires gcc v8 (see cbc.yaml). Python 3.11 is incompatible with anything built with gcc<11 because of runtime conflicts.
+  # pytorch <=1.13.1 hasn't python 3.11 support on win
+  skip: True  # [py<37 or (((linux and ppc64le) or win) and py==311)]
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 
 requirements:
   host:

@@ -12,10 +12,9 @@ source:
   sha256: fb58c830b67902acfd0fc5ddee268a64bdc476c41fb571347c6134c261f1723d
 
 build:
-  number: 0
+  number: 1
   # pytorch hasn't python 3.11 support on ppc64le: ppc requires gcc v8 (see cbc.yaml). Python 3.11 is incompatible with anything built with gcc<11 because of runtime conflicts.
-  # pytorch <=1.13.1 hasn't python 3.11 support on win
-  skip: True  # [py<37 or (((linux and ppc64le) or win) and py==311)]
+  skip: True  # [py<37 or (py>310 and (linux and ppc64le))]
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 
 requirements:

@@ -1,5 +1,5 @@
 {% set name = "torchmetrics" %}
-{% set version = "1.1.2" %}
+{% set version = "1.4.0.post0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,11 +7,10 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 44b01d3c7ca6aa925ac888adff0b0b7c2b2194ff662cf58eb6e05e0e8eb51b00
+  sha256: ab9bcfe80e65dbabbddb6cecd9be21f1f1d5207bb74051ef95260740f2762358
 
 build:
-  number: 1
-  # pytorch hasn't python 3.11 support on ppc64le: ppc requires gcc v8 (see cbc.yaml). Python 3.11 is incompatible with anything built with gcc<11 because of runtime conflicts.
+  number: 0
   skip: True  # [py<38]
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 
@@ -24,8 +23,8 @@ requirements:
   run:
     - python
     - numpy >1.20.0
-    - pytorch >=1.8.1
-    - lightning-utilities >=0.8.0
+    - pytorch >=1.10.0,<2.4.0
+    - lightning-utilities >=0.8.0,<0.12.0
     - typing-extensions  # [py<39]
 
 test:

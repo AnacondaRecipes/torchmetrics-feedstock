@@ -29,29 +29,29 @@ requirements:
   run_constrained:
     # Optional depedencies from torchmetrics/requirements
     # audio
-    - pystoi >=0.3.0,<0.5.0
-    - torchaudio >=0.10.0,<2.4.0
+    - pystoi >=0.3.0
+    - torchaudio >=0.10.0
     # detection
-    - torchvision >=0.8,<0.19.0
-    - pycocotools >2.0.0,<=2.0.7
+    - torchvision >=0.8
+    - pycocotools >2.0.0
     # image
-    - scipy >1.0.0,<1.11.0
+    - scipy >1.0.0
     #- torchvision >=0.8,<0.19.0
     - torch-fidelity <=0.4.0
     # multimodal
-    - transformers >=4.10.0,<4.41.0
+    - transformers >=4.10.0
     - piq <=0.8.0
     # text
-    - nltk >=3.6,<=3.8.1
-    - tqdm >=4.41.0,<4.67.0
-    - regex >=2021.9.24,<=2024.5.10
+    - nltk >=3.6
+    - tqdm >=4.41.0
+    - regex >=2021.9.24
     #- transformers >4.4.0,<4.41.0
-    - mecab-python3 >=1.0.6,<1.1.0
-    - ipadic >=1.0.0, <1.1.0
-    - sentencepiece >=0.2.0,<0.3.0
+    - mecab-python3 >=1.0.6
+    - ipadic >=1.0.0
+    - sentencepiece >=0.2.0
     # visual
-    - matplotlib-base >=3.3.0,<3.9.0
-    - SciencePlots >=2.0.0,<2.2.0
+    - matplotlib-base >=3.3.0
+    - SciencePlots >=2.0.0
 
 test:
   imports:

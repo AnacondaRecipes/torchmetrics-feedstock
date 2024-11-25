@@ -1,5 +1,5 @@
 {% set name = "torchmetrics" %}
-{% set version = "1.1.2" %}
+{% set version = "1.2.1" %}
 
 package:
   name: {{ name|lower }}
@@ -7,11 +7,10 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 44b01d3c7ca6aa925ac888adff0b0b7c2b2194ff662cf58eb6e05e0e8eb51b00
+  sha256: 217387738f84939c39b534b20d4983e737cc448d27aaa5340e0327948d97ca3e
 
 build:
-  number: 1
-  # pytorch hasn't python 3.11 support on ppc64le: ppc requires gcc v8 (see cbc.yaml). Python 3.11 is incompatible with anything built with gcc<11 because of runtime conflicts.
+  number: 0
   skip: True  # [py<38]
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 
@@ -24,6 +23,7 @@ requirements:
   run:
     - python
     - numpy >1.20.0
+    - packaging >17.1
     - pytorch >=1.8.1
     - lightning-utilities >=0.8.0
     - typing-extensions  # [py<39]
@@ -38,7 +38,7 @@ test:
     - pip check
 
 about:
-  home: https://pypi.org/project/torchmetrics/
+  home: https://pypi.org/project/torchmetrics
   license: Apache-2.0
   license_family: Apache
   license_file: LICENSE
@@ -51,8 +51,8 @@ about:
     We currently have around 25+ metrics implemented and we continuously is adding more metrics, both within
     already covered domains (classification, regression ect.) but also new domains (object detection ect.).
     We make sure that all our metrics are rigorously tested such that you can trust them.
-  doc_url: https://torchmetrics.readthedocs.io/
-  dev_url: https://github.com/PyTorchLightning/metrics
+  doc_url: https://lightning.ai/docs/torchmetrics/stable
+  dev_url: https://github.com/Lightning-AI/torchmetrics
 
 extra:
   recipe-maintainers:

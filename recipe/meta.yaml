@@ -1,5 +1,5 @@
 {% set name = "torchmetrics" %}
-{% set version = "1.6.3" %}
+{% set version = "1.8.2" %}
 
 package:
   name: {{ name|lower }}
@@ -7,12 +7,12 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: be59ffe9e9abf12ac12c3ac4383b2fc7731ad2bf3748ae1b06e8dea34e9f8a65
+  sha256: cf64a901036bf107f17a524009eea7781c9c5315d130713aeca5747a686fe7a5
 
 build:
   number: 0
-  skip: True  # [py<38]
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  skip: true  # [py<39]
 
 requirements:
   host:
@@ -26,44 +26,71 @@ requirements:
     - packaging >17.1
     - pytorch >=2.0.0
     - lightning-utilities >=0.8.0
-    - typing-extensions  # [py<39]
   run_constrained:
     # Optional depedencies from torchmetrics/requirements
     # audio
+    - pesq >=0.0.4
     - pystoi >=0.4.0
     - torchaudio >=2.0.1
+    - gammatone >=1.0.0
+    - librosa >=0.10.0
+    - onnxruntime >=1.12.0
+    - requests >=2.19.0
+    # clustering
+    - torch_linear_assignment >=0.0.2
     # detection
     - torchvision >=0.15.1
     - pycocotools >2.0.0
     # image
     - scipy >1.0.0
-    # Torchvision is in image.txt but covered above
-    - torch-fidelity <=0.4.0
+    #- torchvision >=0.15.1 -> already in the detection section
     # multimodal
-    - transformers >=4.42.3
-    - piq <=0.8.0
+    - transformers >=4.43.0
+    - einops >=0.7.0
+    - timm >=0.9.0
     # text
     - nltk >3.8.1
     - regex >=2021.9.24
-    # Transformers is in text.txt but covered above
+    #- transformers >=4.43.0 -> already in the multimodal section
     - mecab-python3 >=1.0.6
     - ipadic >=1.0.0
     - sentencepiece >=0.2.0
+    # video
+    - vmaf-torch >=1.1.0,<1.2.0
+    #- einops >=0.7.0,<0.9.0 -> already in the multimodal section
     # visual
     - matplotlib-base >=3.6.0
-    - SciencePlots >=2.0.0
+    - scienceplots >= 2.0.0
 
 test:
   imports:
     - torchmetrics
-    - torchmetrics.utilities.imports
-  requires:
-    - pip
+    - torchmetrics.aggregation
+    - torchmetrics.audio
+    - torchmetrics.classification
+    - torchmetrics.clustering
+    - torchmetrics.collections
+    - torchmetrics.detection
+    - torchmetrics.functional
+    - torchmetrics.image
+    - torchmetrics.metric
+    - torchmetrics.multimodal
+    - torchmetrics.nominal
+    - torchmetrics.regression
+    - torchmetrics.retrieval
+    - torchmetrics.segmentation
+    - torchmetrics.shape
+    - torchmetrics.text
+    - torchmetrics.utilities
+    - torchmetrics.utilities
+    - torchmetrics.wrappers
   commands:
     - pip check
+  requires:
+    - pip
 
 about:
-  home: https://pypi.org/project/torchmetrics/
+  home: https://pypi.org/project/torchmetrics
   license: Apache-2.0
   license_family: Apache
   license_file: LICENSE
@@ -76,7 +103,7 @@ about:
     We currently have around 25+ metrics implemented and we continuously is adding more metrics, both within
     already covered domains (classification, regression ect.) but also new domains (object detection ect.).
     We make sure that all our metrics are rigorously tested such that you can trust them.
-  doc_url: https://torchmetrics.readthedocs.io/
+  doc_url: https://torchmetrics.readthedocs.io
   dev_url: https://github.com/PyTorchLightning/metrics
 
 extra:

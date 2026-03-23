@@ -1,5 +1,5 @@
 {% set name = "torchmetrics" %}
-{% set version = "1.8.2" %}
+{% set version = "1.9.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: cf64a901036bf107f17a524009eea7781c9c5315d130713aeca5747a686fe7a5
+  sha256: a488609948600df52d3db4fcdab02e62aab2a85ef34da67037dc3e65b8512faa
 
 build:
   number: 0
@@ -25,7 +25,7 @@ requirements:
     - numpy >1.20.0
     - packaging >17.1
     - pytorch >=2.0.0
-    - lightning-utilities >=0.8.0
+    - lightning-utilities >=0.15.3
   run_constrained:
     # Optional depedencies from torchmetrics/requirements
     # audio
@@ -35,7 +35,7 @@ requirements:
     - gammatone >=1.0.0
     - librosa >=0.10.0
     - onnxruntime >=1.12.0
-    - requests >=2.19.0
+    - requests >=2.22.0
     # clustering
     - torch_linear_assignment >=0.0.2
     # detection
@@ -56,8 +56,8 @@ requirements:
     - ipadic >=1.0.0
     - sentencepiece >=0.2.0
     # video
-    - vmaf-torch >=1.1.0,<1.2.0
-    #- einops >=0.7.0,<0.9.0 -> already in the multimodal section
+    - vmaf-torch >=1.1.0
+    #- einops >=0.7.0 -> already in the multimodal section
     # visual
     - matplotlib-base >=3.6.0
     - scienceplots >= 2.0.0
